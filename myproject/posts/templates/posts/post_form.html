@@ -1,5 +1,5 @@
-{%extends "base.html"%}
-{% block title %}NEW POST{% endblock title %}
+{% extends "base.html" %}
+{% block title %}POSTS Form{% endblock title %}
 {% block head %}
 {%load static%}
 <link rel="stylesheet" href="{%static 'css/posts.css'%}">
@@ -7,56 +7,34 @@
 {% block header_image %}
 <img class="masthead-avatar mb-5" src="{% static 'assets/blog/posts.webp' %}" alt="..." />
 {% endblock header_image %}
-{% block header_title %}Post Form{% endblock header_title %}
-
+{% block header_title %}New Post{% endblock header_title %}
 {% block content %}
-<h2>hello</h2>
-<form action="/posts/post_form/" method="post">
-    {%csrf_token%}
-
-    {% if form.errors %}
-    <div class="alert alert-danger text-center">
-        <ul class="list-unstyled">
-            {% for field in form %}
-            {% if field.errors %}
-            <li>{{ field.label }}: {{ field.errors|striptags }}</li>
-            {% endif %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
+<form method="POST" action ='/posts/post_form/'>
+    {% csrf_token %}
     <div class="mb-3 text-center">
-        <label for="{{ form.title.id_for_label }}" class="form-label">Post Title</label>
+        <label for="{{ form.title.id_for_label }}" class="form-label">title</label>
         <div class="col-sm-6 mx-auto">
             {{ form.title }}
         </div>
     </div>
     <div class="mb-3 text-center">
-        <label for="{{ form.body.id_for_label }}" class="form-label">Body</label>
+        <label for="{{ form.content.id_for_label }}" class="form-label">body</label>
         <div class="col-sm-6 mx-auto">
             {{ form.body }}
         </div>
     </div>
-<div class="mb-3 text-center">
-    <label for="{{ form.slug.id_for_label }}" class="form-label">Slug</label>
-    <div class="col-sm-6 mx-auto">
-        {{ form.slug }}
-    </div>
-</div>
-<div class="mb-3 text-center">
-    <label for="{{ form.date.id_for_label }}" class="form-label">Date</label>
-    <div class="col-sm-6 mx-auto">
-        {{ form.date }}
-    </div>
-</div>
-{% comment %} <div class="mb-3 text-center">
-    <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
-    <div class="col-sm-6 mx-auto">
-        {{ form.username }}
+    <div class="mb-3 text-center">
+        <label for="{{ form.slug.id_for_label }}" class="form-label">slug</label>
+        <div class="col-sm-6 mx-auto">
+            {{ form.slug }}
         </div>
-        </div> {% endcomment %}
-    </form>
-    {% endblock content %}
+    </div>
+    <div class="mb-3 text-center">
+        <label for="{{ form.banner.id_for_label }}" class="form-label">banner</label>
+        <div class="col-sm-6 mx-auto">
+            {{ form.banner }}
+        </div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+{% endblock content %}

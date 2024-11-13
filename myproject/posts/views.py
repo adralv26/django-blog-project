@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Post
-from .forms import CustomPost
+from .forms import PostForm
 # from django.http import HttpResponse
 
 # Create your views here.
@@ -17,16 +17,14 @@ def post_page(request, slug):
     post = Post.objects.get(slug=slug)
     return render(request, 'posts/post_page.html',{'post':post} )
 
-def post_form(request):
+def create_post(request):
     if request.method == 'POST':
-        form = CustomPost(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("posts:list")
     else:
-        form = CustomPost()
-            
+        form = PostForm()
     for field in form.fields.values():
         field.widget.attrs["class"] = "form-control"
-    context = {"form": form}
-    return render(request, 'posts/post_form.html', context)
+    return render(request, 'posts/post_form.html', {'form': form})

@@ -7,12 +7,9 @@
 {% block header_image %}
 <img class="masthead-avatar mb-5" src="{% static 'assets/blog/posts.webp' %}" alt="..." />
 {% endblock header_image %}
-{% block header_title %}
-Posts List
-{% endblock header_title %}
-
+{% block header_title %}Posts List{% endblock header_title %}
 {% block content %}
-<h2><a href="\posts\post_form\" class='bg-light p-2 mb-4 rounded shadow-sm'>NEW POST</a></h2>
+<h2 class="bg-light p-4 mb-4 rounded shadow-sm"><a href="\posts\post_form\">New Post</a></h2>
 <div class="row justify-content-center">
     {% for post in posts  %}
         <div class="col-md-8">
